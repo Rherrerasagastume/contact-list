@@ -3,10 +3,10 @@ const listaDeContactos = [
     id: 1,
     nombres: "Juan",
     apellidos: "Perez",
-    telefono: "9323-4562",
+    telefono: "123-456-7890",
     ubicaciones: [
-      { ciudad: "Tegucigalpa", direccion: "Dos cuadras despues de escula juan jose estrada" },
-      { ciudad: "Comayagua", direccion: "Calle principal despues de Super la Colonia" }
+      { ciudad: "Ciudad1", direccion: "Dirección1" },
+      { ciudad: "Ciudad2", direccion: "Dirección2" }
     ]
   },
   {
@@ -21,13 +21,11 @@ const listaDeContactos = [
   }
 ];
 
-// Función para añadir un nuevo contacto
 function agregarContacto(lista, contacto) {
   lista.push(contacto);
   console.log(`Contacto '${contacto.nombres} ${contacto.apellidos}' agregado con éxito.`);
 }
 
-// Función para borrar un contacto existente
 function borrarContacto(lista, id) {
   const indice = lista.findIndex(contacto => contacto.id === id);
   if (indice !== -1) {
@@ -38,7 +36,16 @@ function borrarContacto(lista, id) {
   }
 }
 
-// Función para imprimir los contactos en la lista
+function actualizarContacto(lista, id, nuevoDatos) {
+  const contactoExistente = lista.find(contacto => contacto.id === id);
+  if (contactoExistente) {
+    Object.assign(contactoExistente, nuevoDatos);
+    console.log(`Contacto '${contactoExistente.nombres} ${contactoExistente.apellidos}' actualizado con éxito.`);
+  } else {
+    console.log(`El contacto con ID ${id} no se encontró en la lista.`);
+  }
+}
+
 function imprimirContactos(lista) {
   console.log("Lista de contactos:");
   lista.forEach(contacto => {
@@ -50,7 +57,6 @@ function imprimirContactos(lista) {
     });
   });
 }
-
 
 imprimirContactos(listaDeContactos);
 
@@ -68,4 +74,17 @@ agregarContacto(listaDeContactos, nuevoContacto);
 
 borrarContacto(listaDeContactos, 2);
 
+const idAActualizar = 1; 
+const nuevosDatos = {
+  nombres: "NuevoNombre",
+  apellidos: "NuevoApellido",
+  telefono: "999-999-9999",
+  ubicaciones: [
+    { ciudad: "NuevaCiudad", direccion: "NuevaDireccion" }
+  ]
+};
+
+actualizarContacto(listaDeContactos, idAActualizar, nuevosDatos);
+
+// lista de contactos actualizada
 imprimirContactos(listaDeContactos);
